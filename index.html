@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Little Something for Gena</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lato:wght@300;400&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rose:    #e8a0a0;
+      --deep:    #b05070;
+      --blush:   #f7e8e8;
+      --sky:     #c8dff0;
+      --mountain:#7a9eb5;
+      --gold:    #d4a96a;
+      --text:    #3a2a2a;
+      --soft:    #7a5a5a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      color: var(--text);
+      background: #fdf6f0;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(160deg, #fdf6f0 0%, #f0e4e4 50%, #dceaf5 100%);
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(232,160,160,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 70%, rgba(200,223,240,0.22) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--deep);
+      margin-bottom: 1rem;
+      opacity: 0.75;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--deep);
+    }
+
+    .hero p {
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      color: var(--soft);
+      max-width: 520px;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--soft);
+      opacity: 0.6;
+      animation: bobble 2s ease-in-out infinite;
+    }
+    .scroll-cue svg { width: 20px; opacity: 0.7; }
+
+    @keyframes bobble {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(6px); }
+    }
+
+    /* ── BREATHING SECTION ── */
+    .breathe-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, #f0e4e4 0%, #fdf6f0 100%);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--deep);
+      opacity: 0.7;
+      margin-bottom: 0.6rem;
+    }
+
+    .breathe-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .breathe-section > p {
+      color: var(--soft);
+      font-size: 0.95rem;
+      margin-bottom: 3rem;
+      max-width: 420px;
+      line-height: 1.7;
+    }
+
+    /* Heart container */
+    .heart-wrap {
+      position: relative;
+      width: 260px;
+      height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Outer glow ring */
+    .heart-wrap::before {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,160,160,0.25) 0%, transparent 70%);
+      animation: pulse-ring 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse-ring {
+      0%,100% { transform: scale(0.85); opacity: 0.4; }
+      50%      { transform: scale(1.15); opacity: 0.8; }
+    }
+
+    .heart-svg {
+      width: 200px;
+      height: 200px;
+      filter: drop-shadow(0 8px 30px rgba(176,80,112,0.35));
+      transform-origin: center;
+      transition: none;
+    }
+
+    /* Breathing states driven by JS adding classes */
+    .heart-svg.inhale {
+      animation: breathe-in 4s ease-in-out forwards;
+    }
+    .heart-svg.hold-in {
+      animation: hold-full 4s ease-in-out forwards;
+    }
+    .heart-svg.exhale {
+      animation: breathe-out 6s ease-in-out forwards;
+    }
+    .heart-svg.hold-out {
+      animation: hold-empty 2s ease-in-out forwards;
+    }
+    .heart-svg.idle {
+      animation: gentle-pulse 3.5s ease-in-out infinite;
+    }
+
+    @keyframes breathe-in {
+      from { transform: scale(0.72); }
+      to   { transform: scale(1.18); }
+    }
+    @keyframes hold-full {
+      from { transform: scale(1.18); }
+      to   { transform: scale(1.18); }
+    }
+    @keyframes breathe-out {
+      from { transform: scale(1.18); }
+      to   { transform: scale(0.72); }
+    }
+    @keyframes hold-empty {
+      from { transform: scale(0.72); }
+      to   { transform: scale(0.72); }
+    }
+    @keyframes gentle-pulse {
+      0%,100% { transform: scale(0.92); }
+      50%      { transform: scale(1.05); }
+    }
+
+    /* Instruction text */
+    .breathe-instruction {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--deep);
+      height: 2.6rem;
+      transition: opacity 0.6s ease;
+      margin-bottom: 0.5rem;
+    }
+
+    .breathe-counter {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: var(--soft);
+      opacity: 0.6;
+      height: 1.2rem;
+    }
+
+    .breathe-btn {
+      margin-top: 2rem;
+      padding: 0.7rem 2.2rem;
+      border: 1.5px solid var(--rose);
+      border-radius: 50px;
+      background: transparent;
+      color: var(--deep);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+    .breathe-btn:hover {
+      background: var(--rose);
+      color: white;
+    }
+
+    /* Progress ring */
+    .progress-ring {
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      transform: rotate(-90deg);
+    }
+    .progress-ring circle {
+      fill: none;
+      stroke: var(--rose);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-dasharray: 785;
+      stroke-dashoffset: 785;
+      opacity: 0.5;
+      transition: stroke-dashoffset linear, opacity 0.4s;
+    }
+
+    /* Breath count badge */
+    .breath-badge {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      color: var(--soft);
+      letter-spacing: 0.12em;
+      opacity: 0.7;
+    }
+    .breath-badge span {
+      color: var(--deep);
+      font-weight: 400;
+    }
+
+    /* ── ABOUT SECTION ── */
+    .about-section {
+      background: linear-gradient(170deg, #fdf6f0 0%, #e8f0f8 100%);
+      padding: 6rem 2rem;
+      text-align: center;
+    }
+
+    .about-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 1rem;
+    }
+
+    .about-section > p {
+      color: var(--soft);
+      max-width: 560px;
+      margin: 0 auto 3.5rem;
+      line-height: 1.8;
+      font-size: 0.98rem;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.9);
+      border-radius: 20px;
+      padding: 2rem 1.8rem;
+      flex: 1 1 220px;
+      max-width: 260px;
+      text-align: left;
+      box-shadow: 0 4px 24px rgba(176,80,112,0.07);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 36px rgba(176,80,112,0.13);
+    }
+
+    .card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .card p {
+      font-size: 0.87rem;
+      color: var(--soft);
+      line-height: 1.7;
+    }
+
+    /* ── TWO HOMES ── */
+    .homes-section {
+      padding: 6rem 2rem;
+      background: #fdf6f0;
+      text-align: center;
+    }
+
+    .homes-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 3rem;
+    }
+
+    .homes-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .home-card {
+      flex: 1 1 340px;
+      max-width: 400px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.09);
+      position: relative;
+    }
+
+    .home-card-bg {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      position: relative;
+    }
+
+    .home-ma .home-card-bg {
+      background: linear-gradient(135deg, #f9e8d8 0%, #f0d4d4 100%);
+    }
+
+    .home-co .home-card-bg {
+      background: linear-gradient(135deg, #c8dff0 0%, #a8c8e8 100%);
+    }
+
+    .home-card-body {
+      background: white;
+      padding: 1.6rem;
+      text-align: left;
+    }
+
+    .home-card-body h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 0.3rem;
+    }
+
+    .home-card-body .loc {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mountain);
+      margin-bottom: 0.8rem;
+    }
+
+    .home-card-body p {
+      font-size: 0.87rem;
+      color: var(--soft);
+      line-height: 1.7;
+    }
+
+    /* ── AI NOTE ── */
+    .ai-note {
+      background: linear-gradient(160deg, #e8f0f8 0%, #f7e8e8 100%);
+      padding: 6rem 2rem;
+      text-align: center;
+    }
+
+    .ai-note h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      margin-bottom: 1.2rem;
+    }
+
+    .ai-note p {
+      max-width: 580px;
+      margin: 0 auto 1.2rem;
+      color: var(--soft);
+      line-height: 1.85;
+      font-size: 0.98rem;
+    }
+
+    .ai-note em {
+      color: var(--deep);
+      font-style: italic;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 2rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--soft);
+      opacity: 0.6;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── PARTICLES (subtle floating hearts) ── */
+    .particle {
+      position: fixed;
+      pointer-events: none;
+      opacity: 0;
+      font-size: 1rem;
+      animation: float-up 3.5s ease-in forwards;
+      z-index: 999;
+    }
+    @keyframes float-up {
+      0%   { opacity: 0.7; transform: translateY(0) scale(1) rotate(-10deg); }
+      100% { opacity: 0;   transform: translateY(-120px) scale(0.4) rotate(20deg); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <p class="hero-tag">Made with love &amp; a little AI magic</p>
+  <h1>Hello,<br /><em>Gena.</em></h1>
+  <p>
+    This page was crafted by an AI — to show you what's possible,
+    and to offer you something genuinely useful: a moment to breathe.
+  </p>
+  <div class="scroll-cue">
+    <span>scroll</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ══════════ BREATHING HEART ══════════ -->
+<section class="breathe-section" id="breathe">
+  <p class="section-label">Interactive · Mindfulness</p>
+  <h2>Breathe with your heart</h2>
+  <p>
+    Tap the heart below to begin a guided breathing exercise.
+    Let the rhythm carry you.
+  </p>
+
+  <div class="heart-wrap" id="heartWrap" onclick="toggleBreathe()">
+    <!-- Progress ring -->
+    <svg class="progress-ring" viewBox="0 0 250 250">
+      <circle id="progressCircle" cx="125" cy="125" r="122"/>
+    </svg>
+
+    <!-- Heart SVG -->
+    <svg class="heart-svg idle" id="heartSvg" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="hg" cx="50%" cy="40%" r="60%">
+          <stop offset="0%"   stop-color="#f2a0b8"/>
+          <stop offset="60%"  stop-color="#d4607a"/>
+          <stop offset="100%" stop-color="#a03050"/>
+        </radialGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="2.5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <path
+        d="M50 85 C50 85 5 55 5 28 C5 14 16 5 28 5 C36 5 43 9 50 17 C57 9 64 5 72 5 C84 5 95 14 95 28 C95 55 50 85 50 85 Z"
+        fill="url(#hg)"
+        filter="url(#glow)"
+      />
+      <!-- subtle highlight -->
+      <path
+        d="M33 16 C29 18 23 24 22 31"
+        fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="3.5" stroke-linecap="round"
+      />
+    </svg>
+  </div>
+
+  <div class="breathe-instruction" id="breatheInstruction">tap the heart to begin</div>
+  <div class="breathe-counter" id="breatheCounter"></div>
+
+  <div class="breath-badge" id="breathBadge" style="display:none">
+    Breaths completed: <span id="breathCount">0</span>
+  </div>
+
+  <button class="breathe-btn" id="breatheBtn" onclick="toggleBreathe()">Begin</button>
+</section>
+
+<!-- ══════════ ABOUT GENA ══════════ -->
+<section class="about-section" id="about">
+  <p class="section-label">A little about you</p>
+  <h2>The woman of two worlds</h2>
+  <p>
+    From the charm of New England to the wide skies of Colorado —
+    Gena moves through life with warmth, curiosity, and a home in her heart wherever she goes.
+  </p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">🍂</div>
+      <h3>New England Roots</h3>
+      <p>East Longmeadow, Massachusetts — a place of seasons, community, and deep familiarity. Home has a particular smell and rhythm there.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏔️</div>
+      <h3>Colorado Calling</h3>
+      <p>A new chapter: wide open skies, mountain air, and the quiet thrill of a fresh start. Colorado has a way of making you feel alive.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌿</div>
+      <h3>Present &amp; Grounded</h3>
+      <p>Whether in the Pioneer Valley or the Rockies, Gena brings the same steadiness — present, warm, and deeply rooted in what matters.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💛</div>
+      <h3>Family First</h3>
+      <p>The kind of mom whose children build things to impress her — because her love is the audience worth performing for.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TWO HOMES ══════════ -->
+<section class="homes-section">
+  <h2>Two places to call home</h2>
+  <div class="homes-grid">
+    <div class="home-card home-ma">
+      <div class="home-card-bg">🍁</div>
+      <div class="home-card-body">
+        <h3>East Longmeadow</h3>
+        <div class="loc">Massachusetts · New England</div>
+        <p>
+          Nestled in the Pioneer Valley, East Longmeadow carries the warmth of a tight-knit community,
+          crisp autumn air, and all the comfort of a place that knows you.
+          The Connecticut River winds nearby; the seasons are vivid and real.
+        </p>
+      </div>
+    </div>
+    <div class="home-card home-co">
+      <div class="home-card-bg">⛰️</div>
+      <div class="home-card-body">
+        <h3>Colorado</h3>
+        <div class="loc">The Centennial State · The Rockies</div>
+        <p>
+          A brand-new home, a brand-new adventure. Colorado's 300 days of sunshine,
+          mountain trails, and big-sky silence offer something Massachusetts can't —
+          the electric feeling of possibility.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ AI NOTE ══════════ -->
+<section class="ai-note">
+  <p class="section-label">From the machine</p>
+  <h2>What AI wanted you to know</h2>
+  <p>
+    This entire page — the design, the words, the breathing heart — was created by an AI in minutes,
+    guided only by a few sentences about you.
+  </p>
+  <p>
+    AI can <em>write</em>, <em>design</em>, <em>code</em>, <em>compose</em>, and <em>create</em>.
+    But the reason this page exists is entirely human: your child wanted to show you something beautiful.
+  </p>
+  <p>
+    That's what AI is really good at — <em>amplifying love</em>.
+  </p>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  Made with Claude AI &nbsp;·&nbsp; crafted for Gena Rotas &nbsp;·&nbsp; with love
+</footer>
+
+<script>
+  // ── Breathing Heart Logic ──
+  const PHASES = [
+    { name: 'inhale',   label: 'Breathe in…',  duration: 4000,  cls: 'inhale'   },
+    { name: 'hold-in',  label: 'Hold…',         duration: 4000,  cls: 'hold-in'  },
+    { name: 'exhale',   label: 'Breathe out…',  duration: 6000,  cls: 'exhale'   },
+    { name: 'hold-out', label: 'Rest…',          duration: 2000,  cls: 'hold-out' },
+  ];
+
+  const CIRCUMFERENCE = 2 * Math.PI * 122; // ~785.4
+
+  let running   = false;
+  let phaseIdx  = 0;
+  let timeout   = null;
+  let rafId     = null;
+  let phaseStart = 0;
+  let breathCount = 0;
+
+  const heartEl        = document.getElementById('heartSvg');
+  const instrEl        = document.getElementById('breatheInstruction');
+  const counterEl      = document.getElementById('breatheCounter');
+  const btnEl          = document.getElementById('breatheBtn');
+  const circleEl       = document.getElementById('progressCircle');
+  const badgeEl        = document.getElementById('breathBadge');
+  const countEl        = document.getElementById('breathCount');
+
+  function setHeartClass(cls) {
+    heartEl.className = 'heart-svg ' + cls;
+    // force reflow so animation restarts
+    void heartEl.offsetWidth;
+    heartEl.className = 'heart-svg ' + cls;
+  }
+
+  function animateProgress(duration, reverse) {
+    cancelAnimationFrame(rafId);
+    phaseStart = performance.now();
+
+    function step(now) {
+      const elapsed = now - phaseStart;
+      const t = Math.min(elapsed / duration, 1);
+      const offset = reverse
+        ? CIRCUMFERENCE * t
+        : CIRCUMFERENCE * (1 - t);
+      circleEl.style.strokeDashoffset = offset;
+      circleEl.style.opacity = '0.55';
+      if (t < 1 && running) rafId = requestAnimationFrame(step);
+    }
+    rafId = requestAnimationFrame(step);
+  }
+
+  function runPhase(idx) {
+    if (!running) return;
+    phaseIdx = idx % PHASES.length;
+    const phase = PHASES[phaseIdx];
+
+    setHeartClass(phase.cls);
+    instrEl.style.opacity = '0';
+    setTimeout(() => {
+      instrEl.textContent = phase.label;
+      instrEl.style.opacity = '1';
+    }, 120);
+
+    // Countdown
+    const seconds = Math.round(phase.duration / 1000);
+    let remaining = seconds;
+    counterEl.textContent = remaining;
+    const tickInterval = setInterval(() => {
+      remaining--;
+      counterEl.textContent = remaining > 0 ? remaining : '';
+    }, 1000);
+
+    // Progress ring: fill forward on inhale/hold-in, drain on exhale/hold-out
+    const reverse = (phase.name === 'exhale' || phase.name === 'hold-out');
+    animateProgress(phase.duration, reverse);
+
+    timeout = setTimeout(() => {
+      clearInterval(tickInterval);
+      // Count one full breath after exhale
+      if (phase.name === 'exhale') {
+        breathCount++;
+        countEl.textContent = breathCount;
+        badgeEl.style.display = 'block';
+      }
+      runPhase(phaseIdx + 1);
+    }, phase.duration);
+  }
+
+  function toggleBreathe() {
+    if (!running) {
+      running = true;
+      btnEl.textContent = 'Pause';
+      runPhase(0);
+    } else {
+      running = false;
+      btnEl.textContent = 'Resume';
+      clearTimeout(timeout);
+      cancelAnimationFrame(rafId);
+      setHeartClass('idle');
+      instrEl.textContent = 'paused — tap to resume';
+      counterEl.textContent = '';
+      circleEl.style.opacity = '0';
+    }
+  }
+
+  // ── Floating heart particles on click ──
+  document.getElementById('heartWrap').addEventListener('click', spawnParticles);
+
+  function spawnParticles(e) {
+    const emojis = ['💗','💓','💖','🌸','✨'];
+    for (let i = 0; i < 5; i++) {
+      const el = document.createElement('div');
+      el.className = 'particle';
+      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      el.style.left = (e.clientX + (Math.random() - 0.5) * 60) + 'px';
+      el.style.top  = (e.clientY + (Math.random() - 0.5) * 60) + 'px';
+      el.style.fontSize = (0.8 + Math.random() * 0.8) + 'rem';
+      el.style.animationDelay = (Math.random() * 0.3) + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 3800);
+    }
+  }
+</script>
+</body>
+</html>
