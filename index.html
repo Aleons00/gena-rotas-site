@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A Little Something for Gena</title>
+  <title>Gena Rotas, LICSW · Therapist, Author & Coach</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lato:wght@300;400&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap');
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -14,674 +14,894 @@
       --deep:    #b05070;
       --blush:   #f7e8e8;
       --sky:     #c8dff0;
-      --mountain:#7a9eb5;
-      --gold:    #d4a96a;
-      --text:    #3a2a2a;
-      --soft:    #7a5a5a;
+      --mountain:#5a85a8;
+      --gold:    #c9924a;
+      --text:    #2e1f1f;
+      --soft:    #6a4a4a;
+      --white:   #fffaf8;
     }
 
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Lato', sans-serif;
       color: var(--text);
-      background: #fdf6f0;
+      background: var(--white);
       overflow-x: hidden;
     }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 2.5rem;
+      background: rgba(255,250,248,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(232,160,160,0.18);
+    }
+    .nav-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--deep);
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--soft);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--deep); }
 
     /* ── HERO ── */
     .hero {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       align-items: center;
-      justify-content: center;
-      background: linear-gradient(160deg, #fdf6f0 0%, #f0e4e4 50%, #dceaf5 100%);
-      padding: 2rem;
-      text-align: center;
+      padding: 7rem 6rem 4rem;
+      gap: 4rem;
+      background: linear-gradient(135deg, #fdf6f0 0%, #f4e8e8 45%, #dceaf5 100%);
       position: relative;
       overflow: hidden;
     }
-
-    .hero::before {
+    .hero::after {
       content: '';
       position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 20% 30%, rgba(232,160,160,0.18) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 70%, rgba(200,223,240,0.22) 0%, transparent 60%);
+      right: -10%;
+      top: -10%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,223,240,0.3) 0%, transparent 70%);
       pointer-events: none;
     }
-
+    .hero-text { position: relative; z-index: 1; }
     .hero-tag {
-      font-family: 'Lato', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.25em;
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--deep);
-      margin-bottom: 1rem;
       opacity: 0.75;
+      margin-bottom: 1rem;
+      display: block;
     }
-
     .hero h1 {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
-      font-size: clamp(2.8rem, 7vw, 5.5rem);
-      line-height: 1.1;
+      font-size: clamp(3rem, 5vw, 5rem);
+      line-height: 1.05;
       color: var(--text);
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
     }
-
     .hero h1 em {
       font-style: italic;
       color: var(--deep);
     }
-
+    .hero-creds {
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      color: var(--mountain);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--deep);
+      line-height: 1.6;
+      border-left: 2px solid var(--rose);
+      padding-left: 1.2rem;
+      margin-bottom: 2rem;
+    }
     .hero p {
-      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      font-size: 1rem;
       color: var(--soft);
-      max-width: 520px;
-      line-height: 1.8;
+      line-height: 1.85;
+      max-width: 480px;
       margin-bottom: 2.5rem;
     }
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      padding: 0.8rem 2rem;
+      background: var(--deep);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-primary:hover { background: #8a3050; transform: translateY(-2px); }
+    .btn-outline {
+      padding: 0.8rem 2rem;
+      background: transparent;
+      color: var(--deep);
+      border: 1.5px solid var(--rose);
+      border-radius: 50px;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+    }
+    .btn-outline:hover { background: var(--rose); color: white; transform: translateY(-2px); }
 
-    .scroll-cue {
-      position: absolute;
-      bottom: 2rem;
+    /* Hero right — photo placeholder / decorative */
+    .hero-visual {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-circle {
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, rgba(232,160,160,0.25), rgba(200,223,240,0.35));
+      border: 1px solid rgba(232,160,160,0.3);
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       gap: 0.5rem;
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
+      text-align: center;
+      padding: 2rem;
+    }
+    .hero-circle .initials {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      font-weight: 300;
+      color: var(--deep);
+      opacity: 0.6;
+      line-height: 1;
+    }
+    .hero-circle .years {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--soft);
-      opacity: 0.6;
-      animation: bobble 2s ease-in-out infinite;
+      opacity: 0.7;
     }
-    .scroll-cue svg { width: 20px; opacity: 0.7; }
 
-    @keyframes bobble {
-      0%,100% { transform: translateY(0); }
-      50%      { transform: translateY(6px); }
+    /* ── SECTION COMMON ── */
+    section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1000px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.67rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--deep);
+      opacity: 0.65;
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--text);
+      margin-bottom: 1.2rem;
+    }
+    .section-sub {
+      color: var(--soft);
+      font-size: 0.97rem;
+      line-height: 1.85;
+      max-width: 580px;
+      margin-bottom: 3rem;
+    }
+
+    /* ── ABOUT ── */
+    .about-section {
+      background: var(--white);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-body p {
+      color: var(--soft);
+      font-size: 0.97rem;
+      line-height: 1.9;
+      margin-bottom: 1.2rem;
+    }
+    .creds-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .creds-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+      color: var(--soft);
+      line-height: 1.5;
+    }
+    .creds-list li::before {
+      content: '—';
+      color: var(--rose);
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+    .creds-list strong {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    /* ── SPECIALTIES ── */
+    .specialties-section {
+      background: linear-gradient(160deg, #f7eee8 0%, #eef4f9 100%);
+    }
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.4rem;
+    }
+    .spec-card {
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.95);
+      border-radius: 18px;
+      padding: 1.8rem 1.6rem;
+      box-shadow: 0 4px 20px rgba(176,80,112,0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .spec-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 32px rgba(176,80,112,0.12);
+    }
+    .spec-icon { font-size: 1.7rem; margin-bottom: 0.8rem; }
+    .spec-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+    .spec-card p {
+      font-size: 0.84rem;
+      color: var(--soft);
+      line-height: 1.65;
+    }
+
+    /* ── BOOKS ── */
+    .books-section { background: var(--white); }
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+    }
+    .book-card {
+      display: flex;
+      gap: 1.6rem;
+      align-items: flex-start;
+      padding: 2rem;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #fff5f5 0%, #f5f8fc 100%);
+      border: 1px solid rgba(232,160,160,0.2);
+      transition: transform 0.3s;
+    }
+    .book-card:hover { transform: translateY(-3px); }
+    .book-spine {
+      flex-shrink: 0;
+      width: 70px;
+      height: 100px;
+      border-radius: 4px 8px 8px 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 4px 4px 16px rgba(0,0,0,0.1);
+    }
+    .book-1 .book-spine { background: linear-gradient(160deg, #f2c4b8, #d4909a); }
+    .book-2 .book-spine { background: linear-gradient(160deg, #b8cef2, #90aad4); }
+    .book-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 0.3rem;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .book-year {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mountain);
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+    .book-info p {
+      font-size: 0.85rem;
+      color: var(--soft);
+      line-height: 1.7;
     }
 
     /* ── BREATHING SECTION ── */
     .breathe-section {
-      min-height: 100vh;
+      background: linear-gradient(180deg, #f9eef0 0%, #eef4f9 100%);
+      text-align: center;
+    }
+    .breathe-section .section-inner {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      background: linear-gradient(180deg, #f0e4e4 0%, #fdf6f0 100%);
-      padding: 4rem 2rem;
-      text-align: center;
     }
+    .breathe-section .section-sub { text-align: center; }
 
-    .section-label {
-      font-size: 0.68rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--deep);
-      opacity: 0.7;
-      margin-bottom: 0.6rem;
-    }
-
-    .breathe-section h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      color: var(--text);
-      margin-bottom: 0.5rem;
-    }
-
-    .breathe-section > p {
-      color: var(--soft);
-      font-size: 0.95rem;
-      margin-bottom: 3rem;
-      max-width: 420px;
-      line-height: 1.7;
-    }
-
-    /* Heart container */
+    /* Heart wrap */
     .heart-wrap {
       position: relative;
-      width: 260px;
-      height: 260px;
+      width: 300px;
+      height: 300px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
 
-    /* Outer glow ring */
-    .heart-wrap::before {
-      content: '';
+    /* Ripple rings */
+    .ripple {
       position: absolute;
-      width: 300px;
-      height: 300px;
+      width: 280px; height: 280px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(232,160,160,0.25) 0%, transparent 70%);
-      animation: pulse-ring 4s ease-in-out infinite;
+      border: 2px solid rgba(232,100,130,0.4);
+      animation: ripple-out 3s ease-out infinite;
+      pointer-events: none;
+    }
+    .ripple:nth-child(2) { animation-delay: 1s; }
+    .ripple:nth-child(3) { animation-delay: 2s; }
+    @keyframes ripple-out {
+      0%   { transform: scale(0.6); opacity: 0.7; }
+      100% { transform: scale(1.5); opacity: 0; }
     }
 
-    @keyframes pulse-ring {
-      0%,100% { transform: scale(0.85); opacity: 0.4; }
-      50%      { transform: scale(1.15); opacity: 0.8; }
+    /* Glow behind heart */
+    .heart-glow {
+      position: absolute;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(220,80,110,0.22) 0%, rgba(255,150,180,0.08) 50%, transparent 70%);
+      animation: glow-pulse 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes glow-pulse {
+      0%,100% { transform: scale(0.8); opacity: 0.6; }
+      50%      { transform: scale(1.3); opacity: 1; }
     }
 
     .heart-svg {
-      width: 200px;
-      height: 200px;
-      filter: drop-shadow(0 8px 30px rgba(176,80,112,0.35));
+      width: 190px;
+      height: 190px;
+      position: relative;
+      z-index: 2;
+      filter: drop-shadow(0 6px 24px rgba(200,60,90,0.45)) drop-shadow(0 0 40px rgba(255,120,150,0.25));
       transform-origin: center;
-      transition: none;
     }
+    .heart-svg.idle      { animation: gentle-beat 1.2s ease-in-out infinite; }
+    .heart-svg.inhale    { animation: breathe-in 4s ease-in-out forwards; }
+    .heart-svg.hold-in   { animation: hold-full 4s linear forwards; }
+    .heart-svg.exhale    { animation: breathe-out 6s ease-in-out forwards; }
+    .heart-svg.hold-out  { animation: hold-empty 2s linear forwards; }
 
-    /* Breathing states driven by JS adding classes */
-    .heart-svg.inhale {
-      animation: breathe-in 4s ease-in-out forwards;
+    @keyframes gentle-beat {
+      0%,100% { transform: scale(0.96); }
+      14%      { transform: scale(1.06); }
+      28%      { transform: scale(0.96); }
+      42%      { transform: scale(1.04); }
+      70%      { transform: scale(0.96); }
     }
-    .heart-svg.hold-in {
-      animation: hold-full 4s ease-in-out forwards;
-    }
-    .heart-svg.exhale {
-      animation: breathe-out 6s ease-in-out forwards;
-    }
-    .heart-svg.hold-out {
-      animation: hold-empty 2s ease-in-out forwards;
-    }
-    .heart-svg.idle {
-      animation: gentle-pulse 3.5s ease-in-out infinite;
-    }
+    @keyframes breathe-in  { from{transform:scale(0.7)} to{transform:scale(1.22)} }
+    @keyframes hold-full   { from{transform:scale(1.22)} to{transform:scale(1.22)} }
+    @keyframes breathe-out { from{transform:scale(1.22)} to{transform:scale(0.7)} }
+    @keyframes hold-empty  { from{transform:scale(0.7)} to{transform:scale(0.7)} }
 
-    @keyframes breathe-in {
-      from { transform: scale(0.72); }
-      to   { transform: scale(1.18); }
+    /* Progress ring */
+    .progress-ring {
+      position: absolute;
+      width: 260px; height: 260px;
+      transform: rotate(-90deg);
+      z-index: 1;
     }
-    @keyframes hold-full {
-      from { transform: scale(1.18); }
-      to   { transform: scale(1.18); }
+    .progress-ring circle {
+      fill: none;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-dasharray: 816;
+      stroke-dashoffset: 816;
+      opacity: 0.7;
     }
-    @keyframes breathe-out {
-      from { transform: scale(1.18); }
-      to   { transform: scale(0.72); }
-    }
-    @keyframes hold-empty {
-      from { transform: scale(0.72); }
-      to   { transform: scale(0.72); }
-    }
-    @keyframes gentle-pulse {
-      0%,100% { transform: scale(0.92); }
-      50%      { transform: scale(1.05); }
-    }
+    .progress-ring .track { stroke: rgba(220,160,170,0.2); stroke-dashoffset: 0; }
+    .progress-ring .fill  { stroke: url(#ringGrad); transition: stroke-dashoffset linear; }
 
-    /* Instruction text */
     .breathe-instruction {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
       font-style: italic;
       font-weight: 300;
       color: var(--deep);
-      height: 2.6rem;
-      transition: opacity 0.6s ease;
-      margin-bottom: 0.5rem;
+      height: 3rem;
+      transition: opacity 0.5s ease;
+      margin-bottom: 0.4rem;
     }
-
     .breathe-counter {
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
+      font-size: 1rem;
+      letter-spacing: 0.22em;
       color: var(--soft);
-      opacity: 0.6;
-      height: 1.2rem;
+      opacity: 0.55;
+      height: 1.4rem;
+      font-weight: 300;
     }
-
     .breathe-btn {
-      margin-top: 2rem;
-      padding: 0.7rem 2.2rem;
+      margin-top: 1.8rem;
+      padding: 0.75rem 2.4rem;
       border: 1.5px solid var(--rose);
       border-radius: 50px;
       background: transparent;
       color: var(--deep);
       font-family: 'Lato', sans-serif;
-      font-size: 0.82rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background 0.3s, color 0.3s;
-    }
-    .breathe-btn:hover {
-      background: var(--rose);
-      color: white;
-    }
-
-    /* Progress ring */
-    .progress-ring {
-      position: absolute;
-      width: 250px;
-      height: 250px;
-      transform: rotate(-90deg);
-    }
-    .progress-ring circle {
-      fill: none;
-      stroke: var(--rose);
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-dasharray: 785;
-      stroke-dashoffset: 785;
-      opacity: 0.5;
-      transition: stroke-dashoffset linear, opacity 0.4s;
-    }
-
-    /* Breath count badge */
-    .breath-badge {
-      margin-top: 1.5rem;
-      font-size: 0.75rem;
-      color: var(--soft);
-      letter-spacing: 0.12em;
-      opacity: 0.7;
-    }
-    .breath-badge span {
-      color: var(--deep);
-      font-weight: 400;
-    }
-
-    /* ── ABOUT SECTION ── */
-    .about-section {
-      background: linear-gradient(170deg, #fdf6f0 0%, #e8f0f8 100%);
-      padding: 6rem 2rem;
-      text-align: center;
-    }
-
-    .about-section h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(2rem, 5vw, 3rem);
-      margin-bottom: 1rem;
-    }
-
-    .about-section > p {
-      color: var(--soft);
-      max-width: 560px;
-      margin: 0 auto 3.5rem;
-      line-height: 1.8;
-      font-size: 0.98rem;
-    }
-
-    .cards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      justify-content: center;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.7);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.9);
-      border-radius: 20px;
-      padding: 2rem 1.8rem;
-      flex: 1 1 220px;
-      max-width: 260px;
-      text-align: left;
-      box-shadow: 0 4px 24px rgba(176,80,112,0.07);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 36px rgba(176,80,112,0.13);
-    }
-
-    .card-icon {
-      font-size: 1.8rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .card h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
-      font-weight: 400;
-      margin-bottom: 0.5rem;
-      color: var(--text);
-    }
-
-    .card p {
-      font-size: 0.87rem;
-      color: var(--soft);
-      line-height: 1.7;
-    }
-
-    /* ── TWO HOMES ── */
-    .homes-section {
-      padding: 6rem 2rem;
-      background: #fdf6f0;
-      text-align: center;
-    }
-
-    .homes-section h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(2rem, 5vw, 3rem);
-      margin-bottom: 3rem;
-    }
-
-    .homes-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      justify-content: center;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    .home-card {
-      flex: 1 1 340px;
-      max-width: 400px;
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.09);
-      position: relative;
-    }
-
-    .home-card-bg {
-      height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 5rem;
-      position: relative;
-    }
-
-    .home-ma .home-card-bg {
-      background: linear-gradient(135deg, #f9e8d8 0%, #f0d4d4 100%);
-    }
-
-    .home-co .home-card-bg {
-      background: linear-gradient(135deg, #c8dff0 0%, #a8c8e8 100%);
-    }
-
-    .home-card-body {
-      background: white;
-      padding: 1.6rem;
-      text-align: left;
-    }
-
-    .home-card-body h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      font-weight: 400;
-      margin-bottom: 0.3rem;
-    }
-
-    .home-card-body .loc {
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--mountain);
-      margin-bottom: 0.8rem;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s, transform 0.2s;
     }
+    .breathe-btn:hover { background: var(--deep); color: white; transform: translateY(-2px); }
 
-    .home-card-body p {
-      font-size: 0.87rem;
+    .breath-tally {
+      margin-top: 1.2rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
       color: var(--soft);
-      line-height: 1.7;
+      opacity: 0.65;
+    }
+    .breath-tally span { color: var(--deep); font-weight: 700; }
+
+    /* Phase label pill */
+    .phase-pill {
+      display: inline-block;
+      padding: 0.25rem 1rem;
+      border-radius: 50px;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: rgba(232,160,160,0.18);
+      color: var(--deep);
+      margin-bottom: 1.2rem;
+      transition: background 0.4s;
     }
 
-    /* ── AI NOTE ── */
-    .ai-note {
-      background: linear-gradient(160deg, #e8f0f8 0%, #f7e8e8 100%);
-      padding: 6rem 2rem;
+    /* ── CONTACT ── */
+    .contact-section {
+      background: linear-gradient(160deg, #2e1f1f 0%, #3a2535 100%);
+      color: white;
       text-align: center;
     }
-
-    .ai-note h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(1.8rem, 5vw, 2.8rem);
-      margin-bottom: 1.2rem;
+    .contact-section .section-label { color: var(--rose); opacity: 0.8; }
+    .contact-section .section-title { color: white; }
+    .contact-section .section-sub { color: rgba(255,255,255,0.55); margin: 0 auto 2.5rem; }
+    .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      justify-content: center;
     }
-
-    .ai-note p {
-      max-width: 580px;
-      margin: 0 auto 1.2rem;
-      color: var(--soft);
-      line-height: 1.85;
-      font-size: 0.98rem;
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.8rem 1.6rem;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 50px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      transition: border-color 0.3s, color 0.3s;
     }
-
-    .ai-note em {
-      color: var(--deep);
-      font-style: italic;
-    }
+    .contact-item:hover { border-color: var(--rose); color: white; }
+    .contact-item .ci { font-size: 1rem; }
 
     /* ── FOOTER ── */
     footer {
-      padding: 2.5rem 2rem;
+      background: #1e1212;
+      color: rgba(255,255,255,0.3);
       text-align: center;
-      font-size: 0.78rem;
-      color: var(--soft);
-      opacity: 0.6;
-      letter-spacing: 0.08em;
+      padding: 2rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
     }
 
-    /* ── PARTICLES (subtle floating hearts) ── */
+    /* ── PARTICLES ── */
     .particle {
       position: fixed;
       pointer-events: none;
       opacity: 0;
-      font-size: 1rem;
-      animation: float-up 3.5s ease-in forwards;
-      z-index: 999;
+      animation: float-up 3s ease-in forwards;
+      z-index: 9999;
+      font-size: 1.1rem;
     }
     @keyframes float-up {
-      0%   { opacity: 0.7; transform: translateY(0) scale(1) rotate(-10deg); }
-      100% { opacity: 0;   transform: translateY(-120px) scale(0.4) rotate(20deg); }
+      0%   { opacity: 0.9; transform: translateY(0) scale(1); }
+      100% { opacity: 0;   transform: translateY(-150px) scale(0.3) rotate(30deg); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 2rem; text-align: center; }
+      .hero p { margin: 0 auto 2rem; }
+      .hero-btns { justify-content: center; }
+      .hero-circle { width: 260px; height: 260px; }
+      .hero-circle .initials { font-size: 3.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { display: none; }
     }
   </style>
 </head>
 <body>
 
-<!-- ══════════ HERO ══════════ -->
+<!-- ── NAV ── -->
+<nav>
+  <span class="nav-name">Gena Rotas, LICSW</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#specialties">Work</a></li>
+    <li><a href="#books">Books</a></li>
+    <li><a href="#breathe">Breathe</a></li>
+    <li><a href="#contact">Connect</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
 <section class="hero">
-  <p class="hero-tag">Made with love &amp; a little AI magic</p>
-  <h1>Hello,<br /><em>Gena.</em></h1>
-  <p>
-    This page was crafted by an AI — to show you what's possible,
-    and to offer you something genuinely useful: a moment to breathe.
-  </p>
-  <div class="scroll-cue">
-    <span>scroll</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <path d="M12 5v14M5 12l7 7 7-7"/>
-    </svg>
+  <div class="hero-text">
+    <span class="hero-tag">Therapist · Author · Coach · Mindfulness Practitioner</span>
+    <h1>Gena<br /><em>Rotas</em></h1>
+    <p class="hero-creds">LICSW · MSW · M.Ed. · HeartMath · EFT</p>
+    <blockquote class="hero-quote">
+      "Become your own best friend — Unconditionally."
+    </blockquote>
+    <p>
+      For over 32 years, Gena has helped individuals, families, and organizations
+      find healing, wholeness, and lasting change — through psychotherapy, coaching,
+      mindfulness, and the radical act of self-compassion.
+    </p>
+    <div class="hero-btns">
+      <a href="#about" class="btn-primary">Learn More</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-circle">
+      <span class="initials">GR</span>
+      <span class="years">32+ years of practice</span>
+      <span class="years" style="margin-top:0.3rem; color:var(--mountain);">East Longmeadow, MA · Colorado</span>
+    </div>
   </div>
 </section>
 
-<!-- ══════════ BREATHING HEART ══════════ -->
-<section class="breathe-section" id="breathe">
-  <p class="section-label">Interactive · Mindfulness</p>
-  <h2>Breathe with your heart</h2>
-  <p>
-    Tap the heart below to begin a guided breathing exercise.
-    Let the rhythm carry you.
-  </p>
-
-  <div class="heart-wrap" id="heartWrap" onclick="toggleBreathe()">
-    <!-- Progress ring -->
-    <svg class="progress-ring" viewBox="0 0 250 250">
-      <circle id="progressCircle" cx="125" cy="125" r="122"/>
-    </svg>
-
-    <!-- Heart SVG -->
-    <svg class="heart-svg idle" id="heartSvg" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="hg" cx="50%" cy="40%" r="60%">
-          <stop offset="0%"   stop-color="#f2a0b8"/>
-          <stop offset="60%"  stop-color="#d4607a"/>
-          <stop offset="100%" stop-color="#a03050"/>
-        </radialGradient>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="2.5" result="blur"/>
-          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
-      <path
-        d="M50 85 C50 85 5 55 5 28 C5 14 16 5 28 5 C36 5 43 9 50 17 C57 9 64 5 72 5 C84 5 95 14 95 28 C95 55 50 85 50 85 Z"
-        fill="url(#hg)"
-        filter="url(#glow)"
-      />
-      <!-- subtle highlight -->
-      <path
-        d="M33 16 C29 18 23 24 22 31"
-        fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="3.5" stroke-linecap="round"
-      />
-    </svg>
-  </div>
-
-  <div class="breathe-instruction" id="breatheInstruction">tap the heart to begin</div>
-  <div class="breathe-counter" id="breatheCounter"></div>
-
-  <div class="breath-badge" id="breathBadge" style="display:none">
-    Breaths completed: <span id="breathCount">0</span>
-  </div>
-
-  <button class="breathe-btn" id="breatheBtn" onclick="toggleBreathe()">Begin</button>
-</section>
-
-<!-- ══════════ ABOUT GENA ══════════ -->
+<!-- ── ABOUT ── -->
 <section class="about-section" id="about">
-  <p class="section-label">A little about you</p>
-  <h2>The woman of two worlds</h2>
-  <p>
-    From the charm of New England to the wide skies of Colorado —
-    Gena moves through life with warmth, curiosity, and a home in her heart wherever she goes.
-  </p>
-
-  <div class="cards">
-    <div class="card">
-      <div class="card-icon">🍂</div>
-      <h3>New England Roots</h3>
-      <p>East Longmeadow, Massachusetts — a place of seasons, community, and deep familiarity. Home has a particular smell and rhythm there.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🏔️</div>
-      <h3>Colorado Calling</h3>
-      <p>A new chapter: wide open skies, mountain air, and the quiet thrill of a fresh start. Colorado has a way of making you feel alive.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🌿</div>
-      <h3>Present &amp; Grounded</h3>
-      <p>Whether in the Pioneer Valley or the Rockies, Gena brings the same steadiness — present, warm, and deeply rooted in what matters.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">💛</div>
-      <h3>Family First</h3>
-      <p>The kind of mom whose children build things to impress her — because her love is the audience worth performing for.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ TWO HOMES ══════════ -->
-<section class="homes-section">
-  <h2>Two places to call home</h2>
-  <div class="homes-grid">
-    <div class="home-card home-ma">
-      <div class="home-card-bg">🍁</div>
-      <div class="home-card-body">
-        <h3>East Longmeadow</h3>
-        <div class="loc">Massachusetts · New England</div>
+  <div class="section-inner">
+    <span class="section-label">About</span>
+    <h2 class="section-title">A life devoted to healing</h2>
+    <div class="about-grid">
+      <div class="about-body">
         <p>
-          Nestled in the Pioneer Valley, East Longmeadow carries the warmth of a tight-knit community,
-          crisp autumn air, and all the comfort of a place that knows you.
-          The Connecticut River winds nearby; the seasons are vivid and real.
+          Gena M. Rotas is a Licensed Independent Clinical Social Worker with over three decades
+          of experience in psychotherapy, life coaching, and mindfulness-based practice.
+          Through her private practice, <strong>Rotas &amp; Associates</strong>, she serves individuals,
+          couples, adolescents, families, and organizations across Massachusetts and Colorado.
+        </p>
+        <p>
+          Gena's approach blends evidence-based clinical methods with heart-centered,
+          holistic techniques — including HeartMath, Emotional Freedom Technique (EFT/Tapping),
+          and mBraining — to address trauma, addiction, anxiety, self-worth, and the universal
+          human desire to simply feel better in one's own skin.
+        </p>
+        <p>
+          She has delivered training to institutions including <strong>MassMutual Financial</strong>
+          and <strong>Bay State Medical Center</strong>, and has trained teachers and staff
+          across Massachusetts and Connecticut school districts on mindfulness and social-emotional wellness.
+        </p>
+        <p>
+          At the core of everything Gena does is a simple conviction:
+          <em>happiness is a choice</em> — and with the right tools, it's one anyone can make.
         </p>
       </div>
-    </div>
-    <div class="home-card home-co">
-      <div class="home-card-bg">⛰️</div>
-      <div class="home-card-body">
-        <h3>Colorado</h3>
-        <div class="loc">The Centennial State · The Rockies</div>
-        <p>
-          A brand-new home, a brand-new adventure. Colorado's 300 days of sunshine,
-          mountain trails, and big-sky silence offer something Massachusetts can't —
-          the electric feeling of possibility.
-        </p>
+      <div>
+        <ul class="creds-list">
+          <li><span><strong>LICSW</strong> — Licensed Independent Clinical Social Worker, Massachusetts</span></li>
+          <li><span><strong>MSW</strong> — Master of Social Work, University of Connecticut</span></li>
+          <li><span><strong>M.Ed.</strong> — Master of Education, Fairfield University</span></li>
+          <li><span><strong>B.A.</strong> — Western Connecticut University</span></li>
+          <li><span><strong>HeartMath Certified</strong> — heart-brain coherence training</span></li>
+          <li><span><strong>EFT / Tapping Certified</strong> — Emotional Freedom Technique</span></li>
+          <li><span><strong>Mindful Schools</strong> — Certified Mindfulness Practitioner</span></li>
+          <li><span><strong>Mindfulness-Based Relapse Prevention</strong> — addiction recovery specialist</span></li>
+          <li><span>Based in <strong>East Longmeadow, MA</strong> and <strong>Colorado</strong></span></li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════ AI NOTE ══════════ -->
-<section class="ai-note">
-  <p class="section-label">From the machine</p>
-  <h2>What AI wanted you to know</h2>
-  <p>
-    This entire page — the design, the words, the breathing heart — was created by an AI in minutes,
-    guided only by a few sentences about you.
-  </p>
-  <p>
-    AI can <em>write</em>, <em>design</em>, <em>code</em>, <em>compose</em>, and <em>create</em>.
-    But the reason this page exists is entirely human: your child wanted to show you something beautiful.
-  </p>
-  <p>
-    That's what AI is really good at — <em>amplifying love</em>.
-  </p>
+<!-- ── SPECIALTIES ── -->
+<section class="specialties-section" id="specialties">
+  <div class="section-inner">
+    <span class="section-label">Areas of Practice</span>
+    <h2 class="section-title">How Gena can help</h2>
+    <p class="section-sub">
+      Whether you're navigating a personal crisis, seeking deeper meaning, or looking to build
+      resilience in your organization — Gena brings warmth, experience, and a full toolkit to every session.
+    </p>
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="spec-icon">🧠</div>
+        <h3>Psychotherapy</h3>
+        <p>Individual, couple, adolescent, and family therapy — rooted in compassion and clinical depth.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">🌿</div>
+        <h3>Mindfulness Coaching</h3>
+        <p>Mindful and compassionate life coaching that builds presence, clarity, and self-trust.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">💓</div>
+        <h3>HeartMath</h3>
+        <p>Science-based techniques to reduce stress and build heart-brain coherence and emotional resilience.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">✋</div>
+        <h3>EFT / Tapping</h3>
+        <p>Emotional Freedom Technique to release stuck energy, trauma, and limiting beliefs.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">🔄</div>
+        <h3>Addiction Recovery</h3>
+        <p>Mindfulness-Based Relapse Prevention — meeting recovery with compassion, not shame.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">🏢</div>
+        <h3>Corporate Training</h3>
+        <p>Wellness and mindfulness programs for businesses, medical centers, and school districts.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ══════════ FOOTER ══════════ -->
+<!-- ── BOOKS ── -->
+<section class="books-section" id="books">
+  <div class="section-inner">
+    <span class="section-label">Published Works</span>
+    <h2 class="section-title">Books by Gena Rotas</h2>
+    <p class="section-sub">
+      Gena's writing brings her clinical wisdom into the hands of anyone ready to change.
+      Both books offer practical, compassionate guidance grounded in decades of real practice.
+    </p>
+    <div class="books-grid">
+      <div class="book-card book-1">
+        <div class="book-spine">📖</div>
+        <div class="book-info">
+          <h3>Love Your Slim Self: How To Stop Trying And Start Succeeding</h3>
+          <span class="book-year">2011 · Health &amp; Wellness</span>
+          <p>
+            A revolutionary approach to weight loss that works at the subconscious level —
+            creating a new self-image so that healthy choices become natural, effortless, and lasting.
+          </p>
+        </div>
+      </div>
+      <div class="book-card book-2">
+        <div class="book-spine">📘</div>
+        <div class="book-info">
+          <h3>Love YOU: Small Changes to Quiet the Gremlins and Tame Those Unhealthy Habits</h3>
+          <span class="book-year">2017 · Self-Help &amp; Recovery</span>
+          <p>
+            The most powerful tool for overcoming self-defeating habits and addiction isn't willpower —
+            it's self-love. Gena shows you exactly how, with warmth, humor, and hard-won insight.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BREATHING HEART ── -->
+<section class="breathe-section" id="breathe">
+  <div class="section-inner">
+    <span class="section-label">Interactive · Mindfulness</span>
+    <h2 class="section-title">Breathe with your heart</h2>
+    <p class="section-sub">
+      Gena's work is grounded in the body's own wisdom. Tap the heart to begin
+      a HeartMath-inspired breathing exercise — one of the simplest tools for returning to yourself.
+    </p>
+
+    <div class="heart-wrap" id="heartWrap" onclick="toggleBreathe()">
+      <!-- Ripple rings -->
+      <div class="ripple"></div>
+      <div class="ripple"></div>
+      <div class="ripple"></div>
+      <!-- Glow -->
+      <div class="heart-glow"></div>
+
+      <!-- Progress ring -->
+      <svg class="progress-ring" viewBox="0 0 260 260">
+        <defs>
+          <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#f08090"/>
+            <stop offset="50%"  stop-color="#d04060"/>
+            <stop offset="100%" stop-color="#8060c0"/>
+          </linearGradient>
+        </defs>
+        <circle class="track" cx="130" cy="130" r="124"/>
+        <circle class="fill" id="progressCircle" cx="130" cy="130" r="124"/>
+      </svg>
+
+      <!-- Heart -->
+      <svg class="heart-svg idle" id="heartSvg" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="hg" cx="45%" cy="38%" r="65%">
+            <stop offset="0%"   stop-color="#ff9eb8"/>
+            <stop offset="40%"  stop-color="#e0406a"/>
+            <stop offset="80%"  stop-color="#b02050"/>
+            <stop offset="100%" stop-color="#801840"/>
+          </radialGradient>
+          <radialGradient id="hg2" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#ff80a8" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="#ff80a8" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <!-- Main heart -->
+        <path
+          d="M50 85 C50 85 4 53 4 27 C4 13 15 4 27 4 C35.5 4 43 8.5 50 17 C57 8.5 64.5 4 73 4 C85 4 96 13 96 27 C96 53 50 85 50 85 Z"
+          fill="url(#hg)"
+          filter="url(#glow)"
+        />
+        <!-- Inner glow overlay -->
+        <path
+          d="M50 85 C50 85 4 53 4 27 C4 13 15 4 27 4 C35.5 4 43 8.5 50 17 C57 8.5 64.5 4 73 4 C85 4 96 13 96 27 C96 53 50 85 50 85 Z"
+          fill="url(#hg2)"
+        />
+        <!-- Highlight -->
+        <path d="M31 15 C27 17.5 21 24 20 32"
+          fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M38 10 C35 11 32 13 30 16"
+          fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="phase-pill" id="phasePill">ready</div>
+    <div class="breathe-instruction" id="breatheInstruction">tap the heart to begin</div>
+    <div class="breathe-counter" id="breatheCounter"></div>
+
+    <button class="breathe-btn" id="breatheBtn" onclick="toggleBreathe()">Begin</button>
+
+    <div class="breath-tally" id="breathTally" style="display:none">
+      Breaths completed: <span id="breathCount">0</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact-section" id="contact">
+  <div class="section-inner">
+    <span class="section-label">Get in Touch</span>
+    <h2 class="section-title">Connect with Gena</h2>
+    <p class="section-sub">
+      Ready to take a step toward healing, growth, or simply feeling better?
+      Gena welcomes new clients and speaking inquiries.
+    </p>
+    <div class="contact-grid">
+      <a href="https://genarotas.com" class="contact-item" target="_blank">
+        <span class="ci">🌐</span> genarotas.com
+      </a>
+      <a href="mailto:genarotas@gmail.com" class="contact-item">
+        <span class="ci">✉️</span> genarotas@gmail.com
+      </a>
+      <a href="tel:4136266528" class="contact-item">
+        <span class="ci">📞</span> (413) 626-6528
+      </a>
+      <a href="https://www.linkedin.com/in/gena-rotas-82993a5/" class="contact-item" target="_blank">
+        <span class="ci">💼</span> LinkedIn
+      </a>
+      <a href="https://www.facebook.com/gena.rotas" class="contact-item" target="_blank">
+        <span class="ci">📘</span> Facebook
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
 <footer>
-  Made with Claude AI &nbsp;·&nbsp; crafted for Gena Rotas &nbsp;·&nbsp; with love
+  Gena Rotas, LICSW &nbsp;·&nbsp; East Longmeadow, MA &amp; Colorado &nbsp;·&nbsp; Rotas &amp; Associates
 </footer>
 
+<!-- ── PARTICLES ── -->
 <script>
-  // ── Breathing Heart Logic ──
+  // ── Breathing Logic ──
   const PHASES = [
-    { name: 'inhale',   label: 'Breathe in…',  duration: 4000,  cls: 'inhale'   },
-    { name: 'hold-in',  label: 'Hold…',         duration: 4000,  cls: 'hold-in'  },
-    { name: 'exhale',   label: 'Breathe out…',  duration: 6000,  cls: 'exhale'   },
-    { name: 'hold-out', label: 'Rest…',          duration: 2000,  cls: 'hold-out' },
+    { name:'inhale',   label:'Breathe in…',  pill:'inhale',  dur:4000, cls:'inhale',   color:'rgba(255,160,180,0.25)' },
+    { name:'hold-in',  label:'Hold…',         pill:'hold',    dur:4000, cls:'hold-in',  color:'rgba(255,200,210,0.18)' },
+    { name:'exhale',   label:'Breathe out…',  pill:'exhale',  dur:6000, cls:'exhale',   color:'rgba(160,190,255,0.2)' },
+    { name:'hold-out', label:'Rest…',          pill:'rest',    dur:2000, cls:'hold-out', color:'rgba(200,220,255,0.15)' },
   ];
+  const CIRC = 2 * Math.PI * 124; // ~779
 
-  const CIRCUMFERENCE = 2 * Math.PI * 122; // ~785.4
+  let running=false, phaseIdx=0, timeout=null, rafId=null, phaseStart=0, breathCount=0;
 
-  let running   = false;
-  let phaseIdx  = 0;
-  let timeout   = null;
-  let rafId     = null;
-  let phaseStart = 0;
-  let breathCount = 0;
+  const heartEl   = document.getElementById('heartSvg');
+  const instrEl   = document.getElementById('breatheInstruction');
+  const counterEl = document.getElementById('breatheCounter');
+  const btnEl     = document.getElementById('breatheBtn');
+  const circleEl  = document.getElementById('progressCircle');
+  const tallyEl   = document.getElementById('breathTally');
+  const countEl   = document.getElementById('breathCount');
+  const pillEl    = document.getElementById('phasePill');
+  const glowEl    = document.querySelector('.heart-glow');
 
-  const heartEl        = document.getElementById('heartSvg');
-  const instrEl        = document.getElementById('breatheInstruction');
-  const counterEl      = document.getElementById('breatheCounter');
-  const btnEl          = document.getElementById('breatheBtn');
-  const circleEl       = document.getElementById('progressCircle');
-  const badgeEl        = document.getElementById('breathBadge');
-  const countEl        = document.getElementById('breathCount');
-
-  function setHeartClass(cls) {
-    heartEl.className = 'heart-svg ' + cls;
-    // force reflow so animation restarts
+  function setClass(cls) {
+    heartEl.className = 'heart-svg';
     void heartEl.offsetWidth;
     heartEl.className = 'heart-svg ' + cls;
   }
 
-  function animateProgress(duration, reverse) {
+  function animRing(dur, forward) {
     cancelAnimationFrame(rafId);
     phaseStart = performance.now();
-
     function step(now) {
-      const elapsed = now - phaseStart;
-      const t = Math.min(elapsed / duration, 1);
-      const offset = reverse
-        ? CIRCUMFERENCE * t
-        : CIRCUMFERENCE * (1 - t);
-      circleEl.style.strokeDashoffset = offset;
-      circleEl.style.opacity = '0.55';
+      const t = Math.min((now - phaseStart) / dur, 1);
+      circleEl.style.strokeDashoffset = forward ? CIRC * (1 - t) : CIRC * t;
       if (t < 1 && running) rafId = requestAnimationFrame(step);
     }
     rafId = requestAnimationFrame(step);
@@ -690,38 +910,39 @@
   function runPhase(idx) {
     if (!running) return;
     phaseIdx = idx % PHASES.length;
-    const phase = PHASES[phaseIdx];
+    const p = PHASES[phaseIdx];
 
-    setHeartClass(phase.cls);
+    setClass(p.cls);
     instrEl.style.opacity = '0';
-    setTimeout(() => {
-      instrEl.textContent = phase.label;
-      instrEl.style.opacity = '1';
-    }, 120);
+    pillEl.textContent = p.pill;
+    pillEl.style.background = p.color;
+    if (glowEl) glowEl.style.background =
+      `radial-gradient(circle, ${p.color.replace('rgba','rgba').replace(/[\d.]+\)$/,'0.4)')} 0%, transparent 70%)`;
 
-    // Countdown
-    const seconds = Math.round(phase.duration / 1000);
-    let remaining = seconds;
+    setTimeout(() => {
+      instrEl.textContent = p.label;
+      instrEl.style.opacity = '1';
+    }, 100);
+
+    let remaining = Math.round(p.dur / 1000);
     counterEl.textContent = remaining;
-    const tickInterval = setInterval(() => {
+    const tick = setInterval(() => {
       remaining--;
       counterEl.textContent = remaining > 0 ? remaining : '';
     }, 1000);
 
-    // Progress ring: fill forward on inhale/hold-in, drain on exhale/hold-out
-    const reverse = (phase.name === 'exhale' || phase.name === 'hold-out');
-    animateProgress(phase.duration, reverse);
+    const isExhale = (p.name === 'exhale' || p.name === 'hold-out');
+    animRing(p.dur, !isExhale);
 
     timeout = setTimeout(() => {
-      clearInterval(tickInterval);
-      // Count one full breath after exhale
-      if (phase.name === 'exhale') {
+      clearInterval(tick);
+      if (p.name === 'exhale') {
         breathCount++;
         countEl.textContent = breathCount;
-        badgeEl.style.display = 'block';
+        tallyEl.style.display = 'block';
       }
       runPhase(phaseIdx + 1);
-    }, phase.duration);
+    }, p.dur);
   }
 
   function toggleBreathe() {
@@ -734,28 +955,27 @@
       btnEl.textContent = 'Resume';
       clearTimeout(timeout);
       cancelAnimationFrame(rafId);
-      setHeartClass('idle');
+      setClass('idle');
       instrEl.textContent = 'paused — tap to resume';
       counterEl.textContent = '';
-      circleEl.style.opacity = '0';
+      pillEl.textContent = 'paused';
     }
   }
 
-  // ── Floating heart particles on click ──
+  // ── Particles ──
   document.getElementById('heartWrap').addEventListener('click', spawnParticles);
-
   function spawnParticles(e) {
-    const emojis = ['💗','💓','💖','🌸','✨'];
-    for (let i = 0; i < 5; i++) {
+    const set = ['💗','💓','💖','✨','🌸','💫','🌟'];
+    for (let i = 0; i < 6; i++) {
       const el = document.createElement('div');
       el.className = 'particle';
-      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      el.style.left = (e.clientX + (Math.random() - 0.5) * 60) + 'px';
-      el.style.top  = (e.clientY + (Math.random() - 0.5) * 60) + 'px';
-      el.style.fontSize = (0.8 + Math.random() * 0.8) + 'rem';
-      el.style.animationDelay = (Math.random() * 0.3) + 's';
+      el.textContent = set[Math.floor(Math.random() * set.length)];
+      el.style.left = (e.clientX + (Math.random()-0.5)*80) + 'px';
+      el.style.top  = (e.clientY + (Math.random()-0.5)*80) + 'px';
+      el.style.fontSize = (0.7 + Math.random() * 1) + 'rem';
+      el.style.animationDelay = (Math.random() * 0.4) + 's';
       document.body.appendChild(el);
-      setTimeout(() => el.remove(), 3800);
+      setTimeout(() => el.remove(), 3500);
     }
   }
 </script>
